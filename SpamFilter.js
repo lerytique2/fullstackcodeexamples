@@ -1,15 +1,15 @@
 /**
  * SpamFilter Component
- * 
+ *
  * This component provides a user interface for checking whether an email address
  * is considered spam. It sends the email address to a backend API, displays
  * the result, and handles input validation and error reporting. It also includes
  * a loading indicator to improve user experience during the API call.
- * 
+ *
  * Usage:
- * 
+ *
  * <SpamFilter />
- * 
+ *
  * The component is useful for applications that need to provide users with the
  * ability to verify email addresses, particularly in the context of anti-spam
  * and security.
@@ -20,7 +20,7 @@ import axios from 'axios';
 
 // Helper function to validate email format
 const validateEmail = (email) => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\.,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,})$/i;
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
     return re.test(String(email).toLowerCase());
 };
 
@@ -49,16 +49,16 @@ const SpamFilter = () => {
             setError('Error checking email');
             console.error('Error checking email:', error);
         } finally {
-            // Set loading to false to hide the loading indicator
+            // Set loading too false to hide the loading indicator
             setLoading(false);
         }
     };
 
-    // Effect hook to call checkEmail with a debounce
+    // Effect hook to call checkEmail with debounce
     useEffect(() => {
         const timerId = setTimeout(() => {
             if (email) {
-                checkEmail();
+                checkEmail().then(() =>{});
             }
         }, 500); // Debounce delay of 500ms
         return () => clearTimeout(timerId);
